@@ -1,0 +1,186 @@
+README: GabeTech Static Website on AWS S3 🚀
+
+This project outlines the steps to host a simple static website on Amazon Web Services (AWS) using Amazon S3 (Simple Storage Service). The website displays "GabeTech" and provides a link to the YouTube channel "GabeTech2099".
+📝 Project Overview
+
+This project demonstrates how to leverage AWS S3 for static website hosting. It's a cost-effective and scalable solution for websites that consist primarily of HTML, CSS, JavaScript, and other static assets, without server-side processing or databases.
+
+The website features:
+
+    A large "GabeTech" title.
+
+    A direct link to the YouTube channel: https://www.youtube.com/@GabeTech2099.
+
+🛠️ Setup Instructions
+
+Follow these steps to deploy and access the static website on AWS S3.
+Step 1: Prepare Your Website Files
+
+Ensure you have your static website files ready. For this project, you'll primarily need an index.html file.
+
+index.html (Example Content):
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GabeTech</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            font-size: 5em; /* Very large font for GabeTech */
+            margin-bottom: 0.2em;
+        }
+        p {
+            font-size: 1.5em; /* Smaller but readable for the link */
+        }
+    </style>
+</head>
+<body>
+    <h1>GabeTech</h1>
+    <p><a href="https://www.youtube.com/@GabeTech2099" target="_blank">My YouTube Channel</a></p>
+</body>
+</html>
+
+Step 2: Create an S3 Bucket
+
+    Log in to the AWS Management Console.
+
+    Navigate to the S3 service.
+
+    Click Create bucket.
+
+    Bucket name: Enter a globally unique name (e.g., gabetech-website-2025). It's recommended to use your domain name if you plan to use a custom domain later.
+
+    AWS Region: Choose a region geographically close to your users.
+
+    Object Ownership: Select ACLs enabled.
+
+    Block Public Access settings for this bucket: Uncheck "Block all public access". Acknowledge the warning.
+
+    Leave other settings as default and click Create bucket.
+
+
+[Screenshot: S3 Bucket Creation](<fix1.Screenshot From 2025-08-23 15-44-21.png>)
+
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/Create_bucket2.png>)
+
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/block_public_access.png>)
+
+
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/bucketv.png>)
+
+
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/bucket_created.png>)
+
+
+
+
+Step 3: Enable Static Website Hosting
+
+    From the S3 console, click on your newly created bucket name.
+
+    Go to the Properties tab.
+
+    Scroll down to the Static website hosting section and click Edit.
+
+    Select Enable.
+
+    Choose Host a static website for the hosting type.
+
+    For Index document, enter index.html.
+
+    (Optional) For Error document, you could specify an error.html if you have one.
+
+    Click Save changes.
+
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/enable_static_web_hosting.png>)
+
+[Screenshot: S3 Bucket Creation] ( )
+
+Step 4: Upload Website Files and Make Them Public
+
+    Go to the Objects tab within your bucket.
+
+    Click the Upload button.
+
+    Add files or Add folder to upload your index.html (and any other website assets like CSS, JS, images).
+
+    After uploading, select all files and folders you just uploaded.
+
+    From the Actions dropdown menu, select Make public using ACL. Confirm the action.
+
+
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/enable_static_web_hosting.png>)
+
+
+Step 5: Configure the Bucket Policy
+
+This policy explicitly grants public read access to your bucket objects.
+
+    Go to the Permissions tab within your bucket.
+
+    Under the Bucket Policy section, click Edit.
+
+    Paste the following policy, replacing your-bucket-name with your actual S3 bucket name:
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "PublicReadGetObject",
+                "Effect": "Allow",
+                "Principal": "*",
+                "Action": [
+                    "s3:GetObject"
+                ],
+                "Resource": [
+                    "arn:aws:s3:::your-bucket-name/*"
+                ]
+            }
+        ]
+    }
+
+    Click Save
+    
+   
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/bucket_policy.png>)
+
+
+🌐 Accessing Your Website
+
+Your static website is now live!
+
+    Go back to the Properties tab of your S3 bucket.
+
+    Scroll down to the Static website hosting section.
+
+    Copy the Bucket website endpoint URL. It will look similar to http://gabetech-website-2025.s3-website-us-east-1.amazonaws.com.
+
+    Paste this URL into your web browser to view your deployed website.
+
+[Screenshot: S3 Bucket Creation](</home/darklord/Pictures/Screenshots/Static_Website_SC/Static_Website.png>)
+
+⚠️ Important Notes
+
+    Security: For a production website, you would typically use Amazon CloudFront in front of your S3 bucket to enable HTTPS, improve performance, and add more advanced caching and security features.
+
+    Custom Domains: If you want to use a custom domain (e.g., www.yourdomain.com), you would configure this through Amazon Route 53 (AWS's DNS service) and CloudFront.
+
+    Costs: S3 static website hosting is very cost-effective, primarily charging for storage, data transfer, and requests.
+
+    AWS Free Tier: This project is designed to be hosted within the AWS Free Tier limits. This includes 5 GB of S3 Standard Storage, 20,000 Get Requests, 2,000 Put Requests, and 100 GB of data transfer out to the internet per month. For a simple lab website, these limits are generally sufficient to avoid charges.
+
+    Monitor Usage: Always monitor your AWS Billing Dashboard and set up Free Tier usage alerts to track your consumption and prevent unexpected costs.
+
+    Avoid Extra Services for Free Lab: To ensure it remains free, stick to the direct S3 static website hosting endpoint and avoid adding services like Amazon CloudFront (for HTTPS or CDN) or Amazon Route 53 (for custom domains) which, while having their own Free Tier components, can incur costs if usage exceeds limits or if not configured carefully.
+
+    Costs: S3 static website hosting is very cost-effective, primarily charging for storage, data transfer, and requests. Beyond the Free Tier, charges are based on usage.
