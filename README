@@ -69,15 +69,6 @@ Step 2: Create an S3 Bucket
     Leave other settings as default and click Create bucket.
 
 
-[Screenshot: S3 Bucket Creation](<Screenshots/Static_Website_SC/fix1.Screenshot From 2025-08-23 15-44-21.png>)
-
-[Screenshot: S3 Bucket Creation](<Screenshots/Static_Website_SC/Create_bucket2.png>)
-
-[Screenshot: S3 Bucket Creation](<Screenshots/Static_Website_SC/block_public_access.png>)
-
-
-[Screenshot: S3 Bucket Creation](<Screenshots/Static_Website_SC/bucketv.png>)
-
 
 
 
@@ -101,7 +92,6 @@ Step 3: Enable Static Website Hosting
 
     Click Save changes.
 
-[Screenshot: S3 Bucket Creation](<Screenshots/Static_Website_SC/enable_static_web_hosting.png>)
 
 [Screenshot: S3 Bucket Creation] ( )
 
@@ -117,8 +107,6 @@ Step 4: Upload Website Files and Make Them Public
 
     From the Actions dropdown menu, select Make public using ACL. Confirm the action.
 
-
-[Screenshot: S3 Bucket Creation](<Screenshots/Static_Website_SC/enable_static_web_hosting.png>)
 
 
 Step 5: Configure the Bucket Policy
@@ -151,7 +139,7 @@ This policy explicitly grants public read access to your bucket objects.
     Click Save
     
    
-[Screenshot: S3 Bucket Creation](<Screenshots/Static_Website_SC/bucket_policy.png>)
+
 
 
 🌐 Accessing Your Website
